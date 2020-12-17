@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { setUsername, setPassword } from './redux/actions';
-import { SET_USERNAME, SET_PASSWORD, SET_TOKEN } from './redux/actionTypes';
+import { SET_USERNAME, SET_PASSWORD, SET_TOKEN, SET_ERROR } from './redux/actionTypes';
 import { Button } from 'react-bootstrap';
 
 import './LoginPage.css';
@@ -28,23 +28,22 @@ class LoginPage extends React.Component {
 			default:
 				break;
 		}
-		console.log(this.props);
+		// console.log(this.props);
 	}
 
 	handleSubmit(e) {
 		console.log('submit');
-		setAuth(this.state.username, this.state.password);
+		console.log(this.props);
 	}
 
 	handleClear(e) {
-		this.setState({
-			username: '',
-			password: ''
-		});
+		console.log('clear');
+		store.dispatch({ type: SET_ERROR, errors: true, message: 'Tons of errors!'});
 	}
 
 	render() {
 		return (
+			<Fragment>
 			<div className="login-div">
 
 				{/* LABEL */}
@@ -58,6 +57,7 @@ class LoginPage extends React.Component {
 					className="mb-3 inputs"
 					type="text"
 					name="username-input"
+					placeholder="Username/email"
 					value={this.props.username}
 					onChange={this.handleChange}
 				/>
@@ -77,8 +77,16 @@ class LoginPage extends React.Component {
 					<Button variant="primary" className="buttons" onClick={this.handleClear}>CLEAR</Button>
 				</div>
 
-			</div>
+				{this.props.errors &&
+				<div className="alert-div">
+					{this.props.errors} {this.props.message}
+				</div>
+				}
 
+
+			</div>
+			
+			</Fragment>
 		);
 	}
 }
@@ -87,7 +95,9 @@ const mapStateToProps = (state) => {
 	return {
 		username: state.username,
 		password: state.password,
-		token: state.token
+		token: state.token,
+		message: state.message,
+		errors: state.errors
 	};
 };
 
