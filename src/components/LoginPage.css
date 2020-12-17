@@ -1,0 +1,59 @@
+body {
+    background: white;
+}
+
+h2 {
+	font-weight: bold !important;
+}
+
+.login-div {
+	/* background: #0a7e8c; */
+	background-image: url('../images/38015-410x293-Web_page_backgrounds.jpg');
+    color: white;
+    border-radius: 1em;
+    padding: 1em;
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-label {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.inputs {
+	border-color: #0a7e8c;
+	border-radius: 3px;
+	width: 370px;
+	text-align: center;
+	/* border-style: inset; */
+}
+
+.button-div {
+	text-align: center;
+}
+
+.buttons {
+	width: 140px;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-weight: bold !important;
+	;
+}
+
+.metal {
+	font-family: Origin, Helvetica Light, sans-serif;
+	text-transform: uppercase;
+	font-size: 4rem;
+	color: rgb(255,242,181);
+	background-image: linear-gradient(rgb(255,242,181) 28%, 
+		rgb(77,77,77) 40%,
+		rgb(255,242,181) 54%);
+	-webkit-background-clip:text;
+	-webkit-text-fill-color: transparent;
+}
