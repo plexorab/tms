@@ -1,9 +1,15 @@
-import { SET_AUTH } from "./actionTypes";
+import { SET_USERNAME, SET_PASSWORD, SET_TOKEN } from "./actionTypes";
 
-export function setAuth(username, password) {
+export function setUsername(username) {
   return {
-    type: SET_AUTH,
-    username,
+    type: SET_USERNAME,
+    username
+  }
+};
+
+export function setPassword(password) {
+  return {
+    type: SET_PASSWORD,
     password
   }
 };

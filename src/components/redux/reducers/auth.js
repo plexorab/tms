@@ -1,19 +1,35 @@
-import { SET_AUTH } from "../actionTypes";
+import { SET_USERNAME, SET_PASSWORD, SET_TOKEN } from "../actionTypes";
 
 const initialState = {
-  username: '',
-  password: ''
+  username: 'jimmy',
+  password: 'abc123'
 };
+
+// export default function(state = initialState, action) {
+//   return state;
+// }
 
 export default function(state = initialState, action) {
   console.log('Action type = ' + action.type);
   switch (action.type) {
-    case SET_AUTH: {
-      console.log('Action = ' + action);
-      const { currentUser } = action.payload;
+    case SET_USERNAME: {
+      const { username } = action;
       return {
-        ...state,
-        currentUser
+        username,
+        password: state.password,
+        token: state.token
+      };
+    }
+    case SET_PASSWORD: {
+      const { password } = action;
+      return {
+        ...password
+      };
+    }
+    case SET_TOKEN: {
+      const { token } = action;
+      return {
+        ...token
       };
     }
     default:

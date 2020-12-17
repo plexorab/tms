@@ -1,19 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setAuth } from './redux/actions';
-import { Alert, Button, InputGroup, FormControl } from 'react-bootstrap';
-import { Person, Key } from 'react-bootstrap-icons';
+import { setUsername, setPassword } from './redux/actions';
+import { SET_USERNAME, SET_PASSWORD, SET_TOKEN } from './redux/actionTypes';
+import { Button } from 'react-bootstrap';
 
 import './LoginPage.css';
+import store from './redux/store';
 
 class LoginPage extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			username: '',
-			password: ''
-		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,18 +18,17 @@ class LoginPage extends React.Component {
 	}
 
 	handleChange(e) {
-		let obj = {};
-		switch(e.target.name) {
+		switch (e.target.name) {
 			case 'username-input':
-				this.setState({ username: e.target.value});
+				store.dispatch({ type: SET_USERNAME, username: e.target.value });
 				break;
 			case 'password-input':
-				this.setState({ password: e.target.value});
+				store.dispatch({ type: SET_PASSWORD, password: e.target.value });
 				break;
 			default:
 				break;
-		}		
-		console.log(this.state);
+		}
+		console.log(this.props);
 	}
 
 	handleSubmit(e) {
@@ -56,49 +52,25 @@ class LoginPage extends React.Component {
 					<h2>Please login</h2>
 				</div>
 
+				<form>
 				{/* USERNAME */}
 				<input
 					className="mb-3 inputs"
 					type="text"
 					name="username-input"
-					value={this.state.username}
+					value={this.props.username}
 					onChange={this.handleChange}
 				/>
-				{/* <InputGroup className="mb-3 inputs">
-					<InputGroup.Prepend>
-						<InputGroup.Text id="basic-addon1"><Person /></InputGroup.Text>
-					</InputGroup.Prepend>
-					<FormControl
-						name="username-input"
-						aria-label="Username"
-						aria-describedby="basic-addon1"
-						type="text"
-						value={this.target.value}
-						onChange={this.handleChange}
-					/>
-				</InputGroup> */}
 
 				{/* PASSWORD */}
 				<input
 					className="mb-3 inputs"
 					type="password"
 					name="password-input"
-					value={this.state.password}
+					value={this.props.password}
 					onChange={this.handleChange}
 				/>
-				{/* <InputGroup className="mb-3 inputs">
-					<InputGroup.Prepend>
-						<InputGroup.Text id="basic-addon1"><Key /></InputGroup.Text>
-					</InputGroup.Prepend>
-					<FormControl
-						name="password-input"
-						aria-label="Password"
-						aria-describedby="basic-addon1"
-						type="password"
-						value={this.state.currentUser.password}
-						onChange={this.handleChange}
-					/>
-				</InputGroup> */}
+				</form>
 
 				<div className="button-div">
 					<Button variant="primary" className="buttons" onClick={this.handleSubmit}>LOGIN</Button>
@@ -111,14 +83,12 @@ class LoginPage extends React.Component {
 	}
 }
 
-// const mapStateToProps = (state) => {
-// 	return {
-// 	  currentUser: state.currentUser,
-// 	};
-//   };
+const mapStateToProps = (state) => {
+	return {
+		username: state.username,
+		password: state.password,
+		token: state.token
+	};
+};
 
-//   const mapDispatchToProps = {
-// 	setAuth,
-//   };  
-
-export default connect(null, { setAuth })(LoginPage);
+export default connect(mapStateToProps)(LoginPage);
