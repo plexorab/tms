@@ -1,16 +1,20 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
-import { setUsername, setPassword } from './redux/actions';
-import { SET_USERNAME, SET_PASSWORD, SET_TOKEN, SET_ERROR } from './redux/actionTypes';
 import { Button } from 'react-bootstrap';
 
 import './LoginPage.css';
-import store from './redux/store';
 
 class LoginPage extends React.Component {
 
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			username: '',
+			password: '',
+			token: '',
+			errors: '',
+			message: '',
+		}
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,25 +24,25 @@ class LoginPage extends React.Component {
 	handleChange(e) {
 		switch (e.target.name) {
 			case 'username-input':
-				store.dispatch({ type: SET_USERNAME, username: e.target.value });
+				this.setState({ username: e.target.value });
 				break;
 			case 'password-input':
-				store.dispatch({ type: SET_PASSWORD, password: e.target.value });
+				this.setState({ password: e.target.value });
 				break;
 			default:
 				break;
 		}
-		// console.log(this.props);
+		// console.log(this.state);
 	}
 
 	handleSubmit(e) {
 		console.log('submit');
-		console.log(this.props);
+		console.log(this.state);
 	}
 
 	handleClear(e) {
 		console.log('clear');
-		store.dispatch({ type: SET_ERROR, errors: true, message: 'Tons of errors!'});
+		
 	}
 
 	render() {
@@ -58,7 +62,7 @@ class LoginPage extends React.Component {
 					type="text"
 					name="username-input"
 					placeholder="Username/email"
-					value={this.props.username}
+					value={this.state.username}
 					onChange={this.handleChange}
 				/>
 
@@ -67,7 +71,7 @@ class LoginPage extends React.Component {
 					className="mb-3 inputs"
 					type="password"
 					name="password-input"
-					value={this.props.password}
+					value={this.state.password}
 					onChange={this.handleChange}
 				/>
 				</form>
@@ -79,7 +83,7 @@ class LoginPage extends React.Component {
 
 				{this.props.errors &&
 				<div className="alert-div">
-					{this.props.errors} {this.props.message}
+					{this.state.errors} {this.state.message}
 				</div>
 				}
 
@@ -91,14 +95,4 @@ class LoginPage extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => {
-	return {
-		username: state.username,
-		password: state.password,
-		token: state.token,
-		message: state.message,
-		errors: state.errors
-	};
-};
-
-export default connect(mapStateToProps)(LoginPage);
+export default LoginPage;
