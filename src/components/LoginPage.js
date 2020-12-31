@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
+import axios from 'axios';
 import { Button } from 'react-bootstrap';
 
 import './LoginPage.css';
@@ -10,13 +11,6 @@ class LoginPage extends React.Component {
 		this.state = {
 			username: '',
 			password: '',
-			token: ''
-		}
-
-		this.state = {
-			username: '',
-			password: '',
-			token: '',
 			errors: '',
 			message: '',
 		}
@@ -40,9 +34,16 @@ class LoginPage extends React.Component {
 		// console.log(this.state);
 	}
 
-	handleSubmit(e) {
-		console.log('submit');
-		console.log(this.state);
+	async handleSubmit(e) {
+		try {
+			const response = await axios.post(
+				'http://localhost:3131/api/auth/signin',
+				{ username: this.state.username, password: this.state.password }
+			);
+			console.log('👉 Returned data:', response);
+		  } catch (e) {
+			console.log(`😱 Axios request failed: ${e}`);
+		  }
 	}
 
 	handleClear(e) {
