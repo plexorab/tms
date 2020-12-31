@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { Button } from 'react-bootstrap';
 
 import './LoginPage.css';
@@ -11,8 +12,8 @@ class LoginPage extends React.Component {
 		this.state = {
 			username: '',
 			password: '',
-			errors: '',
 			message: '',
+			errors: false,
 		}
 
 		this.handleChange = this.handleChange.bind(this);
@@ -34,21 +35,40 @@ class LoginPage extends React.Component {
 		// console.log(this.state);
 	}
 
-	async handleSubmit(e) {
+	async handleSubmit() {
+		console.log(process.env.REACT_APP_API_BASE_URL);
 		try {
+			axios.defaults.withCredentials = true;
 			const response = await axios.post(
-				'http://localhost:3131/api/auth/signin',
-				{ username: this.state.username, password: this.state.password }
+				`${process.env.REACT_APP_API_BASE_URL}/auth/signin`,
+					{
+						username: this.state.username,
+						password: this.state.password,
+						// withCredentials: true,
+      			// headers: {
+						// 	crossDomain: true, 'Content-Type': 'application/json'
+						// },
+					}
 			);
 			console.log('👉 Returned data:', response);
-		  } catch (e) {
-			console.log(`😱 Axios request failed: ${e}`);
-		  }
+			if (response.data.success) {
+				console.log('User successfully authenticated');
+				this.setState({ errors: false, message: '' });
+			} else {
+				console.log(response.data.message);
+				this.setState({ errors: true, message: response.data.message });
+			}
+			// console.log(Cookies.get('username'));
+		} catch (err) {
+			console.log(`😱 Axios request failed: ${err}`);
+			console.log(JSON.stringify(err));
+			this.setState({ errors: true, message: 'Unknown error' });
+		}
 	}
 
 	handleClear(e) {
 		console.log('clear');
-		
+
 	}
 
 	render() {
@@ -60,6 +80,17 @@ class LoginPage extends React.Component {
 				<div className="login-label">
 					<h2>Please login</h2>
 				</div>
+
+				{/* MESSAGE */}
+				{this.state.errors &&
+				<div className="errors-div">
+				{this.state.message}
+				</div>
+				}
+				{!this.state.errors &&
+				<div className="message-div">
+				</div>
+				}
 
 				<form>
 				{/* USERNAME */}
@@ -87,15 +118,8 @@ class LoginPage extends React.Component {
 					<Button variant="primary" className="buttons" onClick={this.handleClear}>CLEAR</Button>
 				</div>
 
-				{this.props.errors &&
-				<div className="alert-div">
-					{this.state.errors} {this.state.message}
-				</div>
-				}
-
-
 			</div>
-			
+
 			</Fragment>
 		);
 	}

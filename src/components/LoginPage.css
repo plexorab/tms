@@ -9,28 +9,29 @@ h2 {
 .login-div {
 	/* background: #0a7e8c; */
 	background-image: url('../images/38015-410x293-Web_page_backgrounds.jpg');
-    color: white;
+  color: white;
 	border-radius: 1em;
 	border-style: solid;
-    padding: 1em;
-    position: absolute;
-    width: 400px;
-    height: 300px;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+  padding: 1em;
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
 .login-label {
+  color: black;
 	text-align: center;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 }
 
 .inputs {
 	border-color: #0a7e8c;
 	border-radius: 3px;
-	width: 370px;
+	width: 364px;
 	text-align: center;
 	/* border-style: inset; */
 }
@@ -39,11 +40,20 @@ h2 {
 	text-align: center;
 }
 
-.alert-div {
+.message-div {
+	margin-top: 5px;
+  margin-bottom: 5px;
+	height: 40px;
+	/* border-radius: 1em; */
+	text-align: center;
+}
+
+.errors-div {
 	background-color: red;
-	margin-top: 10px;
-	height: 50px;
-	border-radius: 1em;
+	margin-top: 5px;
+  margin-bottom: 5px;
+	height: 40px;
+	/* border-radius: 1em; */
 	text-align: center;
 }
 
@@ -60,7 +70,7 @@ h2 {
 	text-transform: uppercase;
 	font-size: 4rem;
 	color: rgb(255,242,181);
-	background-image: linear-gradient(rgb(255,242,181) 28%, 
+	background-image: linear-gradient(rgb(255,242,181) 28%,
 		rgb(77,77,77) 40%,
 		rgb(255,242,181) 54%);
 	-webkit-background-clip:text;
