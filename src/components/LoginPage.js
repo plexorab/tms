@@ -32,11 +32,10 @@ class LoginPage extends React.Component {
 			default:
 				break;
 		}
-		// console.log(this.state);
 	}
 
 	async handleSubmit() {
-		console.log(process.env.REACT_APP_API_BASE_URL);
+		// console.log(process.env.REACT_APP_API_BASE_URL);
 		try {
 			axios.defaults.withCredentials = true;
 			const response = await axios.post(
@@ -44,31 +43,52 @@ class LoginPage extends React.Component {
 					{
 						username: this.state.username,
 						password: this.state.password,
-						// withCredentials: true,
-      			// headers: {
-						// 	crossDomain: true, 'Content-Type': 'application/json'
-						// },
 					}
 			);
-			console.log('👉 Returned data:', response);
+			// console.log('👉 Returned data:', response);
 			if (response.data.success) {
-				console.log('User successfully authenticated');
+				// console.log('User successfully authenticated');
 				this.setState({ errors: false, message: '' });
 			} else {
-				console.log(response.data.message);
+				// console.log(response.data.message);
 				this.setState({ errors: true, message: response.data.message });
 			}
-			// console.log(Cookies.get('username'));
 		} catch (err) {
-			console.log(`😱 Axios request failed: ${err}`);
+			// console.log(`😱 Axios request failed: ${err}`);
 			console.log(JSON.stringify(err));
 			this.setState({ errors: true, message: 'Unknown error' });
 		}
 	}
 
 	handleClear(e) {
-		console.log('clear');
+		// console.log('clear');
+		this.setState(
+			{
+				username: '',
+				password: '',
+				errors: false,
+				message: '',
+			}
+		);
+	}
 
+	async handleValidate(e) {
+		try {
+			axios.defaults.withCredentials = true;
+			const response = await axios.get(
+				`${process.env.REACT_APP_API_BASE_URL}/auth/validate`);
+			console.log('👉 Returned data:', response);
+			// if (response.data.success) {
+			// 	// console.log('User successfully authenticated');
+			// 	this.setState({ errors: false, message: '' });
+			// } else {
+			// 	// console.log(response.data.message);
+			// 	this.setState({ errors: true, message: response.data.message });
+			// }
+		} catch (err) {
+			console.log(JSON.stringify(err));
+			// this.setState({ errors: true, message: 'Unknown error' });
+		}
 	}
 
 	render() {
@@ -83,13 +103,13 @@ class LoginPage extends React.Component {
 
 				{/* MESSAGE */}
 				{this.state.errors &&
-				<div className="errors-div">
-				{this.state.message}
-				</div>
+					<div className="errors-div">
+						{this.state.message}
+					</div>
 				}
 				{!this.state.errors &&
-				<div className="message-div">
-				</div>
+					<div className="message-div">
+					</div>
 				}
 
 				<form>
@@ -118,8 +138,9 @@ class LoginPage extends React.Component {
 					<Button variant="primary" className="buttons" onClick={this.handleClear}>CLEAR</Button>
 				</div>
 
-			</div>
+				<Button variant="primary" className="buttons" onClick={this.handleValidate}>VALIDATE</Button>
 
+			</div>
 			</Fragment>
 		);
 	}
