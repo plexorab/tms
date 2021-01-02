@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import { Button } from 'react-bootstrap';
+
+import { authenticate, isAuthenticated } from '../services/auth';
 
 import './LoginPage.css';
 
@@ -34,27 +34,17 @@ class LoginPage extends React.Component {
 		}
 	}
 
-	async handleSubmit() {
-		// console.log(process.env.REACT_APP_API_BASE_URL);
+	async handleSubmit() {	
 		try {
-			axios.defaults.withCredentials = true;
-			const response = await axios.post(
-				`${process.env.REACT_APP_API_BASE_URL}/auth/signin`,
-					{
-						username: this.state.username,
-						password: this.state.password,
-					}
-			);
-			// console.log('👉 Returned data:', response);
+			const response = await authenticate(this.state.username, this.state.password);
 			if (response.data.success) {
-				// console.log('User successfully authenticated');
 				this.setState({ errors: false, message: '' });
+				// Redirect to home page
+				this.props.history.push('/');
 			} else {
-				// console.log(response.data.message);
 				this.setState({ errors: true, message: response.data.message });
 			}
 		} catch (err) {
-			// console.log(`😱 Axios request failed: ${err}`);
 			console.log(JSON.stringify(err));
 			this.setState({ errors: true, message: 'Unknown error' });
 		}
@@ -70,25 +60,6 @@ class LoginPage extends React.Component {
 				message: '',
 			}
 		);
-	}
-
-	async handleValidate(e) {
-		try {
-			axios.defaults.withCredentials = true;
-			const response = await axios.get(
-				`${process.env.REACT_APP_API_BASE_URL}/auth/validate`);
-			console.log('👉 Returned data:', response);
-			// if (response.data.success) {
-			// 	// console.log('User successfully authenticated');
-			// 	this.setState({ errors: false, message: '' });
-			// } else {
-			// 	// console.log(response.data.message);
-			// 	this.setState({ errors: true, message: response.data.message });
-			// }
-		} catch (err) {
-			console.log(JSON.stringify(err));
-			// this.setState({ errors: true, message: 'Unknown error' });
-		}
 	}
 
 	render() {
@@ -137,8 +108,6 @@ class LoginPage extends React.Component {
 					<Button variant="primary" className="buttons" onClick={this.handleSubmit}>LOGIN</Button>
 					<Button variant="primary" className="buttons" onClick={this.handleClear}>CLEAR</Button>
 				</div>
-
-				<Button variant="primary" className="buttons" onClick={this.handleValidate}>VALIDATE</Button>
 
 			</div>
 			</Fragment>
