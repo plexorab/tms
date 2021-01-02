@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Form, FormControl, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
+import './HomePage.css';
+
 class HomePage extends React.Component {
 
   render() {

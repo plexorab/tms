@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "AveriaRegular";
+  src: local("AveriaRegular"),
+    url("./fonts/AveriaSerifLibre-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "AveriaBold";
+  src: local("AveriaBold"),
+    url("./fonts/AveriaSerifLibre-Bold.ttf") format("truetype");
+  font-weight: normal;
+}

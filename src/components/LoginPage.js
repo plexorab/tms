@@ -23,6 +23,11 @@ class LoginPage extends React.Component {
 		this.handleSignup = this.handleSignup.bind(this);
 	}
 
+	componentDidMount() {
+		console.log('Did mount!');
+		this.handleClear;
+	}
+
 	handleChange(e) {
 		switch (e.target.name) {
 			case 'username-input':
@@ -76,7 +81,7 @@ class LoginPage extends React.Component {
 
 	render() {
 		return (
-			<Fragment>
+				<div>
 				{this.state.signup === false &&
 				<div className="login-div">
 
@@ -131,7 +136,7 @@ class LoginPage extends React.Component {
 				Signup
 				</div>
 			}
-			</Fragment>
+			</div>
 		);
 	}
 }

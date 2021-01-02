@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import './fonts/AveriaSerifLibre-Regular.ttf';
+import './fonts/AveriaSerifLibre-Bold.ttf';
 // import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
