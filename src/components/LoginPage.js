@@ -34,7 +34,7 @@ class LoginPage extends React.Component {
 		}
 	}
 
-	async handleSubmit() {	
+	async handleSubmit() {
 		try {
 			const response = await authenticate(this.state.username, this.state.password);
 			if (response.data.success) {
@@ -65,51 +65,55 @@ class LoginPage extends React.Component {
 	render() {
 		return (
 			<Fragment>
-			<div className="login-div">
+				<div className="login-div">
 
-				{/* LABEL */}
-				<div className="login-label">
-					<h2>Please login</h2>
-				</div>
-
-				{/* MESSAGE */}
-				{this.state.errors &&
-					<div className="errors-div">
-						{this.state.message}
+					{/* LABEL */}
+					<div className="login-label">
+						<h2>Please login</h2>
 					</div>
-				}
-				{!this.state.errors &&
-					<div className="message-div">
+
+					{/* MESSAGE */}
+					{this.state.errors &&
+						<div className="errors-div">
+							{this.state.message}
+						</div>
+					}
+					{!this.state.errors &&
+						<div className="message-div">
+						</div>
+					}
+
+					<form>
+						{/* USERNAME */}
+						<input
+							className="mb-3 inputs"
+							type="text"
+							name="username-input"
+							placeholder="Username/email"
+							value={this.state.username}
+							onChange={this.handleChange}
+						/>
+
+						{/* PASSWORD */}
+						<input
+							className="mb-3 inputs"
+							type="password"
+							name="password-input"
+							value={this.state.password}
+							onChange={this.handleChange}
+						/>
+					</form>
+
+					<div className="button-div">
+						<Button variant="primary" className="buttons" onClick={this.handleSubmit}>LOGIN</Button>
+						<Button variant="primary" className="buttons" onClick={this.handleClear}>CLEAR</Button>
 					</div>
-				}
 
-				<form>
-				{/* USERNAME */}
-				<input
-					className="mb-3 inputs"
-					type="text"
-					name="username-input"
-					placeholder="Username/email"
-					value={this.state.username}
-					onChange={this.handleChange}
-				/>
-
-				{/* PASSWORD */}
-				<input
-					className="mb-3 inputs"
-					type="password"
-					name="password-input"
-					value={this.state.password}
-					onChange={this.handleChange}
-				/>
-				</form>
-
-				<div className="button-div">
-					<Button variant="primary" className="buttons" onClick={this.handleSubmit}>LOGIN</Button>
-					<Button variant="primary" className="buttons" onClick={this.handleClear}>CLEAR</Button>
+					<div>
+						<a href="/signup">Signup</a>
+						<a href="/reset-password">Forgot password</a>
+					</div>
 				</div>
-
-			</div>
 			</Fragment>
 		);
 	}
