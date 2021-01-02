@@ -7,8 +7,24 @@ h2 {
 }
 
 .login-div {
-	/* background: #0a7e8c; */
-	background-image: url("../images/38015-410x293-Web_page_backgrounds.jpg");
+	background: #b3ffb3;
+	/* background-image: url("../images/38015-410x293-Web_page_backgrounds.jpg"); */
+	color: white;
+	border-radius: 1em;
+	border-style: solid;
+	padding: 1em;
+	position: absolute;
+	width: 400px;
+	height: 300px;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+}
+
+.signup-div {
+	background: #b3ffb3;
+	/* background-image: url("../images/38015-410x293-Web_page_backgrounds.jpg"); */
 	color: white;
 	border-radius: 1em;
 	border-style: solid;
@@ -23,6 +39,12 @@ h2 {
 }
 
 .login-label {
+	color: black;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.signup-label {
 	color: black;
 	text-align: center;
 	padding-bottom: 10px;
@@ -58,10 +80,11 @@ h2 {
 }
 
 .buttons {
-	width: 140px;
+	width: 80px;
+	height: 35px;
 	margin-left: 10px;
 	margin-right: 10px;
-	font-weight: bold !important;
+	/* font-weight: bold !important; */
 }
 
 .metal {

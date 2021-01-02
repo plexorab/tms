@@ -14,11 +14,13 @@ class LoginPage extends React.Component {
 			password: '',
 			message: '',
 			errors: false,
+			signup: false,
 		}
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleClear = this.handleClear.bind(this);
+		this.handleSignup = this.handleSignup.bind(this);
 	}
 
 	handleChange(e) {
@@ -58,6 +60,16 @@ class LoginPage extends React.Component {
 				password: '',
 				errors: false,
 				message: '',
+				signup: false,
+			}
+		);
+	}
+
+	handleSignup(e) {
+		// console.log('clear');
+		this.setState(
+			{
+				signup: true,
 			}
 		);
 	}
@@ -65,6 +77,7 @@ class LoginPage extends React.Component {
 	render() {
 		return (
 			<Fragment>
+				{this.state.signup === false &&
 				<div className="login-div">
 
 					{/* LABEL */}
@@ -107,13 +120,17 @@ class LoginPage extends React.Component {
 					<div className="button-div">
 						<Button variant="primary" className="buttons" onClick={this.handleSubmit}>LOGIN</Button>
 						<Button variant="primary" className="buttons" onClick={this.handleClear}>CLEAR</Button>
+						<Button variant="primary" className="buttons" onClick={this.handleSignup}>SIGNUP</Button>
 					</div>
 
-					<div>
-						<a href="/signup">Signup</a>
-						<a href="/reset-password">Forgot password</a>
-					</div>
 				</div>
+			}
+
+			{this.state.signup === true &&
+				<div className="signup-div">
+				Signup
+				</div>
+			}
 			</Fragment>
 		);
 	}
