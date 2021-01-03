@@ -23,10 +23,7 @@ class LoginPage extends React.Component {
 		this.handleSignup = this.handleSignup.bind(this);
 	}
 
-	componentDidMount() {
-		console.log('Did mount!');
-		this.handleClear;
-	}
+	componentDidMount() { }
 
 	handleChange(e) {
 		switch (e.target.name) {
@@ -53,7 +50,7 @@ class LoginPage extends React.Component {
 			}
 		} catch (err) {
 			console.log(JSON.stringify(err));
-			this.setState({ errors: true, message: 'Unknown error' });
+			this.setState({ errors: true, message: 'Authorization failed' });
 		}
 	}
 

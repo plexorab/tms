@@ -1,0 +1,24 @@
+body {
+	font-family: AveriaRegular;
+}
+
+.clients-div {
+    background-color: whitesmoke;
+	border-radius: 4px;
+    border-style: groove;
+    border-width: 2px;
+	/* padding: 1em; */
+	position: absolute;
+	width: 98%;
+	height: 92%;
+	top: 52%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+}
+
+.clients-search-bar {
+    background-color: slategray;
+    margin: 0;
+    padding: 0;
+}

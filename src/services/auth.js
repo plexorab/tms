@@ -15,3 +15,8 @@ export const isAuthenticated = () => {
     axios.defaults.withCredentials = true;
     return axios.get(`${process.env.REACT_APP_API_BASE_URL}/auth/validate`);
 }
+
+export const logout = () => {
+    axios.defaults.withCredentials = true;
+    return axios.get(`${process.env.REACT_APP_API_BASE_URL}/auth/logout`);
+}
